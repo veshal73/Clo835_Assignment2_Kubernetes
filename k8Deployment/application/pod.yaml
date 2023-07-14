@@ -1,0 +1,28 @@
+apiVersion: v1 
+kind: Pod
+metadata:
+  name: employees
+  namespace: nsapp
+  labels:
+    owner: Vishal
+spec:
+  containers:  
+  - name: employees
+    image: 172611943020.dkr.ecr.us-east-1.amazonaws.com/webapp:latest     
+    ports:
+    - name: http
+      containerPort: 8080
+      protocol: TCP
+    env:
+    - name: DBHOST
+      value: "mysql.nsmysql.svc.cluster.local"
+    - name: DBPORT
+      value: "3306"
+    - name: DBUSER
+      value: root
+    - name: DATABASE
+      value: "employees"
+    - name: DBPWD
+      value: password
+    - name: APP_COLOR
+      value: "blue"

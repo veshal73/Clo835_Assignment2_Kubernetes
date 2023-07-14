@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: app
+  namespace: nsapp
+  labels:
+    app: employees
+    owner: Vishal
+spec:
+  type: NodePort
+  ports:
+  - port: 8080
+    targetPort: 8080
+    nodePort: 30000
+  selector:
+    app: employees

@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: appreplicaset
+  namespace: nsapp
+  labels:
+    app: employees
+    owner: Vishal
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: employees
+  template:
+    metadata:
+      labels:
+        app: employees
+    spec:
+      containers:
+      - name: employees
+        image: 172611943020.dkr.ecr.us-east-1.amazonaws.com/webapp:latest
+        ports:
+        - name: http
+          containerPort: 8080
+          protocol: TCP
+        env:
+        - name: DBHOST
+          value: "mysql.nsmysql.svc.cluster.local"
+        - name: DBPORT
+          value: "3306"
+        - name: DBUSER
+          value: root
+        - name: DATABASE
+          value: "employees"
+        - name: DBPWD
+          value: password
+        - name: APP_COLOR
+          value: "blue"
